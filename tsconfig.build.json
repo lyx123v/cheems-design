@@ -1,0 +1,18 @@
+{
+    "compilerOptions": {
+        "outDir": "dist",
+        "module": "ESNext", // 输出的类型
+        "target": "ES5", 
+        "declaration": true, // 生产.d.ts
+        "jsx": "react",
+        "moduleResolution": "node", // 按node方式加载模块
+        "allowSyntheticDefaultImports": true // 允许 import React from 'react'方式引入
+    },
+    "include": [
+        "src"
+    ],
+    "exclude": [
+        "src/**/*.test.tsx",
+        "src/**/*.stories.tsx"
+    ]
+}

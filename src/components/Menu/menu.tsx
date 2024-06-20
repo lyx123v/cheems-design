@@ -26,21 +26,16 @@ interface IMenuContext {
 export const MenuContext = createContext<IMenuContext>({ index: "0" });
 /**
  * 为网站提供导航功能的菜单。支持横向纵向两种模式，支持下拉菜单。
- * ### 引用方法
- *
- * ~~~js
- * import { Menu } from 'curry-design'
- * ~~~
  */
 export const Menu: FC<MenuProps> = (props) => {
   const {
     className,
-    mode,
+    mode = "horizontal",
     style,
     children,
-    defaultIndex,
+    defaultIndex = "0",
     onSelect,
-    defaultOpenSubMenus,
+    defaultOpenSubMenus = [],
   } = props;
   const [currentActive, setActive] = useState(defaultIndex);
   const classes = classNames("curry-menu", className, {
@@ -69,9 +64,7 @@ export const Menu: FC<MenuProps> = (props) => {
           index: index.toString(),
         });
       } else {
-        console.error(
-          "Warning: Menu has a child which is not a MenuItem component"
-        );
+        console.error("Warning: Menu中只能包含MenuItem或SubMenu组件");
       }
     });
   };
@@ -82,11 +75,6 @@ export const Menu: FC<MenuProps> = (props) => {
       </MenuContext.Provider>
     </ul>
   );
-};
-Menu.defaultProps = {
-  defaultIndex: "0",
-  mode: "horizontal",
-  defaultOpenSubMenus: [],
 };
 
 export default Menu;

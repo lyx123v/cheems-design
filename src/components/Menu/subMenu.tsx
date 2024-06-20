@@ -71,9 +71,7 @@ const SubMenu: React.FC<SubMenuProps> = ({
           index: `${index}-${i}`,
         });
       } else {
-        console.error(
-          "Warning: SubMenu has a child which is not a MenuItem component"
-        );
+        console.error("Warning: 下拉选单组件中只能包含MenuItem");
       }
     });
 

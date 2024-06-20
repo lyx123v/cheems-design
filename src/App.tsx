@@ -5,6 +5,8 @@ import Button, { ButtonType, ButtonSize } from "./components/Button";
 import Menu from "./components/Menu";
 import MenuItem from "./components/Menu/menuItem";
 import SubMenu from "./components/Menu/subMenu";
+import Icon from "./components/Icon";
+import Input from "./components/Input";
 
 function App() {
   const props = {
@@ -14,17 +16,35 @@ function App() {
   };
   return (
     <div className="App">
-      <Menu {...props}>
-        <MenuItem>active</MenuItem>
-        <MenuItem disabled>disabled</MenuItem>
-        <MenuItem>xyz</MenuItem>
-        <SubMenu title="dropdown">
-          <MenuItem>drop1</MenuItem>
-        </SubMenu>
-        <SubMenu title="opened">
-          <MenuItem>opened1</MenuItem>
-        </SubMenu>
-      </Menu>
+      <Input
+        style={{ width: "300px" }}
+        placeholder="input with icon"
+        icon="search"
+      />
+      <Input
+        style={{ width: "300px" }}
+        defaultValue="large size"
+        size="lg"
+        icon="search"
+      />
+      <Input
+        style={{ width: "300px" }}
+        placeholder="small size"
+        size="sm"
+        icon="search"
+      />
+      <Input
+        style={{ width: "300px" }}
+        defaultValue="prepend text"
+        icon="search"
+        prepend="https://"
+      />
+      <Input
+        style={{ width: "300px" }}
+        defaultValue="google"
+        icon="search"
+        append=".com"
+      />
     </div>
   );
 }

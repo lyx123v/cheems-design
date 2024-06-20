@@ -65,7 +65,7 @@ let wrapper: RenderResult,
   disabledElement: HTMLElement;
 describe("默认测试", () => {
   beforeEach(() => {
-    wrapper = render(generateMenu(testProps)); // 渲染组件
+    wrapper = render(generateMenu(testProps)); // 创建并渲染组件
     wrapper.container.append(createStyleFile()); // 添加样式，方便测试后续是否可以显示隐藏
     // 获取元素
     menuElement = wrapper.getByTestId("test-menu");
