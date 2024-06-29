@@ -14,25 +14,82 @@ export interface UploadFile {
   error?: any; //上传失败返回的数据
 }
 export interface UploadProps {
-  action: string; //上传地址
-  defaultFileList?: UploadFile[]; //默认文件列表
-  beforeUpload?: (file: File) => boolean | Promise<File>; //上传前钩子
-  onProgress?: (percentage: number, file: File) => void; //上传进度
-  onSuccess?: (data: any, file: File) => void; //上传成功
-  onError?: (err: any, file: File) => void; //上传失败
-  onChange?: (file: File) => void; //文件状态改变
-  onRemove?: (file: UploadFile) => void; //删除文件
-  headers?: { [key: string]: any }; //上传请求头
-  name?: string; //上传文件名
-  data?: { [key: string]: any }; //上传参数
-  withCredentials?: boolean; //跨域请求
-  accept?: string; // 指定文件类型
-  multiple?: boolean; // 是否支持多选
-  drag?: boolean; //是否支持拖拽
-  children?: React.ReactNode; //自定义按钮
+  /**
+   * 上传的地址
+   */
+  action: string;
+  /**
+   * 默认文件列表
+   */
+
+  defaultFileList?: UploadFile[];
+  /**
+   * 上传前钩子
+   */
+  beforeUpload?: (file: File) => boolean | Promise<File>;
+  /**
+   * 上传进度
+   */
+  onProgress?: (percentage: number, file: File) => void;
+  /**
+   * 上传成功
+   */
+  onSuccess?: (data: any, file: File) => void;
+  /**
+   * 上传失败
+   */
+  onError?: (err: any, file: File) => void;
+  /**
+   * 文件状态改变
+   */
+  onChange?: (file: File) => void;
+  /**
+   * 删除文件
+   */
+  onRemove?: (file: UploadFile) => void;
+  /**
+   * 上传请求头
+   */
+  headers?: { [key: string]: any };
+  /**
+   * 上传文件名
+   */
+  name?: string;
+  /**
+   * 上传参数
+   */
+  data?: { [key: string]: any };
+  /**
+   * 跨域请求
+   */
+  withCredentials?: boolean;
+  /**
+   * 指定文件类型
+   */
+  accept?: string;
+  /**
+   * 是否支持多选
+   */
+  multiple?: boolean;
+  /**
+   * 是否支持拖拽
+   */
+  drag?: boolean;
+  /**
+   * 自定义按钮
+   */
+  children?: React.ReactNode;
 }
 
-export const Upload: FC<UploadProps> = (props) => {
+/**
+ * 上传组件
+ * ### 引用方法
+ *
+ * ~~~js
+ * import { Upload } from 'cheemsDesign'
+ * ~~~
+ */
+export const Upload: FC<UploadProps> = props => {
   const {
     action,
     defaultFileList,
@@ -54,12 +111,9 @@ export const Upload: FC<UploadProps> = (props) => {
   const fileInput = useRef<HTMLInputElement>(null); //ref
   const [fileList, setFileList] = useState<UploadFile[]>(defaultFileList || []); // 已上传文件列表
   // 更新文件列表
-  const updateFileList = (
-    updateFile: UploadFile,
-    updateObj: Partial<UploadFile>
-  ) => {
-    setFileList((prevList) => {
-      return prevList.map((file) => {
+  const updateFileList = (updateFile: UploadFile, updateObj: Partial<UploadFile>) => {
+    setFileList(prevList => {
+      return prevList.map(file => {
         if (file.uid === updateFile.uid) {
           return { ...file, ...updateObj };
         } else {
@@ -88,8 +142,8 @@ export const Upload: FC<UploadProps> = (props) => {
     }
   };
   const handleRemove = (file: UploadFile) => {
-    setFileList((prevList) => {
-      return prevList.filter((item) => item.uid !== file.uid);
+    setFileList(prevList => {
+      return prevList.filter(item => item.uid !== file.uid);
     });
     if (onRemove) {
       onRemove(file);
@@ -97,7 +151,7 @@ export const Upload: FC<UploadProps> = (props) => {
   };
   const uploadFiles = (files: FileList) => {
     let postFiles = Array.from(files); // 转数组
-    postFiles.forEach((file) => {
+    postFiles.forEach(file => {
       if (!beforeUpload) {
         // 没有 beforeUpload
         post(file);
@@ -106,7 +160,7 @@ export const Upload: FC<UploadProps> = (props) => {
         const result = beforeUpload(file);
         if (result && result instanceof Promise) {
           // 如果是promise，则继续执行then
-          result.then((processedFile) => {
+          result.then(processedFile => {
             post(processedFile);
           });
         } else if (result !== false) {
@@ -125,13 +179,13 @@ export const Upload: FC<UploadProps> = (props) => {
       raw: file,
     };
     //setFileList([_file, ...fileList])
-    setFileList((prevList) => {
+    setFileList(prevList => {
       return [_file, ...prevList];
     });
     const formData = new FormData(); // 使用FormData获取文件数据
     formData.append(name || "file", file);
     if (data) {
-      Object.keys(data).forEach((key) => {
+      Object.keys(data).forEach(key => {
         formData.append(key, data[key]);
       });
     }
@@ -143,7 +197,7 @@ export const Upload: FC<UploadProps> = (props) => {
           "Content-Type": "multipart/form-data",
         },
         withCredentials,
-        onUploadProgress: (e) => {
+        onUploadProgress: e => {
           let percentage = Math.round((e.loaded * 100) / e.total!) || 0;
           if (percentage < 100) {
             updateFileList(_file, { percent: percentage, status: "uploading" });
@@ -154,14 +208,14 @@ export const Upload: FC<UploadProps> = (props) => {
           }
         },
       })
-      .then((resp) => {
+      .then(resp => {
         updateFileList(_file, { status: "success", response: resp.data });
         if (onSuccess) {
           // 执行上传成功函数：onSuccess
           onSuccess(resp.data, file);
         }
       })
-      .catch((err) => {
+      .catch(err => {
         updateFileList(_file, { status: "error", error: err });
         if (onError) {
           // 执行上传失败函数;onError
@@ -176,15 +230,15 @@ export const Upload: FC<UploadProps> = (props) => {
   };
 
   return (
-    <div className="viking-upload-component">
+    <div className="cheems-upload-component">
       <div
-        className="viking-upload-input"
+        className="cheems-upload-input"
         style={{ display: "inline-block" }}
         onClick={handleClick}
       >
         {drag ? (
           <Dragger
-            onFile={(files) => {
+            onFile={files => {
               uploadFiles(files);
             }}
           >
@@ -194,7 +248,7 @@ export const Upload: FC<UploadProps> = (props) => {
           children
         )}
         <input
-          className="viking-file-input"
+          className="cheems-file-input"
           style={{ display: "none" }}
           ref={fileInput}
           onChange={handleFileChange}

@@ -27,7 +27,7 @@ export const MenuContext = createContext<IMenuContext>({ index: "0" });
 /**
  * 为网站提供导航功能的菜单。支持横向纵向两种模式，支持下拉菜单。
  */
-export const Menu: FC<MenuProps> = (props) => {
+export const Menu: FC<MenuProps> = props => {
   const {
     className,
     mode = "horizontal",
@@ -56,8 +56,7 @@ export const Menu: FC<MenuProps> = (props) => {
   };
   const renderChildren = () => {
     return React.Children.map(children, (child, index) => {
-      const childElement =
-        child as React.FunctionComponentElement<MenuItemProps>;
+      const childElement = child as React.FunctionComponentElement<MenuItemProps>;
       const { displayName } = childElement.type;
       if (displayName === "MenuItem" || displayName === "SubMenu") {
         return React.cloneElement(childElement, {
@@ -70,9 +69,7 @@ export const Menu: FC<MenuProps> = (props) => {
   };
   return (
     <ul className={classes} style={style} data-testid="test-menu">
-      <MenuContext.Provider value={passedContext}>
-        {renderChildren()}
-      </MenuContext.Provider>
+      <MenuContext.Provider value={passedContext}>{renderChildren()}</MenuContext.Provider>
     </ul>
   );
 };

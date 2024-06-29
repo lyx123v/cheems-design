@@ -1,4 +1,4 @@
-.viking-input-wrapper {
+.cheems-input-wrapper {
   display: flex;
   width: 100%;
   margin-bottom: 30px;
@@ -18,14 +18,14 @@
     }
   }
 
-  &:has(.icon-wrapper) .viking-input-group-append {
+  &:has(.icon-wrapper) .cheems-input-group-append {
     padding-right: 40px;
   }
 }
-.icon-wrapper+.viking-input-inner {
+.icon-wrapper+.cheems-input-inner {
   padding-right: 35px;
 }
-.viking-input-inner {
+.cheems-input-inner {
   width: 100%;
   padding: $input-padding-y $input-padding-x;
   font-family: $input-font-family;
@@ -64,8 +64,8 @@
     opacity: 1;
   }
 }
-.viking-input-group-prepend,
-.viking-input-group-append {
+.cheems-input-group-prepend,
+.cheems-input-group-append {
   display: flex;
   align-items: center;
   padding: $input-padding-y $input-padding-x;
@@ -80,27 +80,27 @@
   border: $input-border-width solid $input-group-addon-border-color;
   border-radius: $input-border-radius;
 }
-.viking-input-group-append + .btn {
+.cheems-input-group-append + .btn {
   padding: 0;
   border: 0;
 }
-.input-group > .viking-input-group-prepend,
-.input-group.input-group-append > .viking-input-inner {
+.input-group > .cheems-input-group-prepend,
+.input-group.input-group-append > .cheems-input-inner {
   @include border-right-radius(0);
 }
 
-.input-group > .viking-input-group-append,
-.input-group.input-group-prepend > .viking-input-inner {
+.input-group > .cheems-input-group-append,
+.input-group.input-group-prepend > .cheems-input-inner {
   @include border-left-radius(0);
 }
 
-.input-size-sm .viking-input-inner {
+.input-size-sm .cheems-input-inner {
   padding: $input-padding-y-sm $input-padding-x-sm;
   font-size: $input-font-size-sm;
   border-radius: $input-border-radius-sm;
 }
 
-.input-size-lg .viking-input-inner {
+.input-size-lg .cheems-input-inner {
   padding: $input-padding-y-lg $input-padding-x-lg;
   font-size: $input-font-size-lg;
   border-radius: $input-border-radius-lg;

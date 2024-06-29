@@ -3,6 +3,7 @@ import classnames from "classnames";
 
 export enum ButtonSize {
   Large = "lg",
+  medium = "md",
   Small = "sm",
 }
 
@@ -14,24 +15,39 @@ export enum ButtonType {
 }
 
 interface BaseButtonProps {
+  /**
+   * 自定义类名
+   */
   className?: string;
-  /**设置 Button 的禁用 */
+  /**
+   * 设置 Button 的禁用
+   */
   disabled?: boolean;
-  /**设置 Button 的尺寸 */
+  /**
+   * 设置 Button 的尺寸
+   */
   size?: ButtonSize;
-  /**设置 Button 的类型 */
+  /**
+   * 设置 Button 的类型
+   */
   btnType?: ButtonType;
   children: React.ReactNode;
   href?: string;
 }
-type NativeButtonProps = BaseButtonProps &
-  React.ButtonHTMLAttributes<HTMLElement>;
-type AnchorButtonProps = BaseButtonProps &
-  React.AnchorHTMLAttributes<HTMLElement>;
+type NativeButtonProps = BaseButtonProps & React.ButtonHTMLAttributes<HTMLElement>;
+type AnchorButtonProps = BaseButtonProps & React.AnchorHTMLAttributes<HTMLElement>;
 
 export type ButtonProps = Partial<NativeButtonProps & AnchorButtonProps>;
 
-const Button: React.FC<ButtonProps> = (props) => {
+/**
+ * 按钮组件
+ * ### 引用方法
+ *
+ * ~~~js
+ * import { Button } from 'cheemsDesign'
+ * ~~~
+ */
+const Button: React.FC<ButtonProps> = props => {
   const {
     btnType = ButtonType.Default,
     disabled = false,

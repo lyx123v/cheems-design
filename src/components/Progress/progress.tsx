@@ -8,23 +8,21 @@ export interface ProgressProps {
   theme?: ThemeProps; // 主题
 }
 
-// 进度条组件
-const Progress: FC<ProgressProps> = (props) => {
-  const {
-    percent,
-    strokeHeight = 15,
-    showText = true,
-    styles,
-    theme = "primary",
-  } = props;
+/**
+ * Progress组件, 进度条
+ * ### 引用方法
+ *
+ * ~~~js
+ * import { Progress } from 'cheemsDesign'
+ * ~~~
+ */
+const Progress: FC<ProgressProps> = props => {
+  const { percent, strokeHeight = 15, showText = true, styles, theme = "primary" } = props;
   return (
-    <div className="viking-progress-bar" style={styles}>
-      <div
-        className="viking-progress-bar-outer"
-        style={{ height: `${strokeHeight}px` }}
-      >
+    <div className="cheems-progress-bar" style={styles}>
+      <div className="cheems-progress-bar-outer" style={{ height: `${strokeHeight}px` }}>
         <div
-          className={`viking-progress-bar-inner color-${theme}`}
+          className={`cheems-progress-bar-inner color-${theme}`}
           style={{ width: `${percent}%` }}
         >
           {showText && <span className="inner-text">{`${percent}%`}</span>}

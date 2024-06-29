@@ -4,5 +4,6 @@
       "javascriptreact",
       { "language": "typescript", "autoFix": true},
       { "language": "javascriptreact", "autoFix": true},
-  ]
+  ],
+  "liveServer.settings.port": 5502
 }

@@ -1,16 +1,15 @@
-import React, {
-  FC,
-  ReactElement,
-  InputHTMLAttributes,
-  ChangeEvent,
-} from "react";
+import React, { FC, ReactElement, InputHTMLAttributes, ChangeEvent } from "react";
 import classNames from "classnames";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import Icon from "../Icon/icon";
 
-type InputSize = "lg" | "sm";
-export interface InputProps
-  extends Omit<InputHTMLAttributes<HTMLElement>, "size"> {
+export enum InputSize {
+  Large = "lg",
+  medium = "md",
+  Small = "sm",
+}
+
+export interface InputProps extends Omit<InputHTMLAttributes<HTMLElement>, "size"> {
   /**是否禁用 Input */
   disabled?: boolean;
   /**设置 input 大小，支持 lg 或者是 sm */
@@ -25,11 +24,16 @@ export interface InputProps
 }
 
 /**
- * Input 输入框 通过鼠标或键盘输入内容，是最基础的表单域的包装。
+ * Input组件
+ * ### 引用方法
+ *
+ * ~~~js
+ * import { Input } from 'cheemsDesign'
+ * ~~~
  */
-export const Input: FC<InputProps> = (props) => {
+export const Input: FC<InputProps> = props => {
   const { disabled, size, icon, prepend, append, style, ...restProps } = props;
-  const cnames = classNames("viking-input-wrapper", {
+  const cnames = classNames("cheems-input-wrapper", {
     // 添加类名
     [`input-size-${size}`]: size,
     "is-disabled": disabled,
@@ -53,7 +57,7 @@ export const Input: FC<InputProps> = (props) => {
       {
         // 前缀
       }
-      {prepend && <div className="viking-input-group-prepend">{prepend}</div>}
+      {prepend && <div className="cheems-input-group-prepend">{prepend}</div>}
       {
         // 图标
       }
@@ -63,9 +67,9 @@ export const Input: FC<InputProps> = (props) => {
         </div>
       )}
       <input
-        className="viking-input-inner"
+        className="cheems-input-inner"
         disabled={disabled}
-        onChange={(e) => {
+        onChange={e => {
           disabled && props.onChange && props.onChange(e);
         }}
         {...restProps}
@@ -73,7 +77,7 @@ export const Input: FC<InputProps> = (props) => {
       {
         // 后缀
       }
-      {append && <div className="viking-input-group-append">{append}</div>}
+      {append && <div className="cheems-input-group-append">{append}</div>}
     </div>
   );
 };

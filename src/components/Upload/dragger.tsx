@@ -7,11 +7,11 @@ interface DraggerProps {
 }
 
 // 拖拽功能
-export const Dragger: FC<DraggerProps> = (props) => {
+export const Dragger: FC<DraggerProps> = props => {
   const { onFile, children } = props;
   const [dragOver, setDragOver] = useState(false); // 拖拽状态
   // 拖拽样式
-  const klass = classNames("viking-uploader-dragger", {
+  const klass = classNames("cheems-uploader-dragger", {
     "is-dragover": dragOver,
   });
   // 拖拽文件
@@ -28,10 +28,10 @@ export const Dragger: FC<DraggerProps> = (props) => {
   return (
     <div
       className={klass}
-      onDragOver={(e) => {
+      onDragOver={e => {
         handleDrag(e, true);
       }}
-      onDragLeave={(e) => {
+      onDragLeave={e => {
         handleDrag(e, false);
       }}
       onDrop={handleDrop}

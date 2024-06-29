@@ -28,6 +28,9 @@
 .btn-lg {
   @include button-size($btn-padding-y-lg, $btn-padding-x-lg, $btn-font-size-lg, $btn-border-radius-lg);
 }
+.btn-md {
+  @include button-size($btn-padding-y-md, $btn-padding-x-md, $btn-font-size-md, $btn-border-radius-md);
+}
 .btn-sm {
   @include button-size($btn-padding-y-sm, $btn-padding-x-sm, $btn-font-size-sm, $btn-border-radius-sm);
 }

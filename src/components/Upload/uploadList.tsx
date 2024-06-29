@@ -1,34 +1,30 @@
 import React, { FC } from "react";
 import { UploadFile } from "./upload";
-import Icon from "../Icon/icon";
+import Icon, { ThemeProps } from "../Icon/icon";
 import Progress from "../Progress/progress";
 interface UploadListProps {
   fileList: UploadFile[]; // 文件列表
   onRemove: (_file: UploadFile) => void; // 删除文件
 }
 
-export const UploadList: FC<UploadListProps> = (props) => {
+export const UploadList: FC<UploadListProps> = props => {
   const { fileList, onRemove } = props;
 
   return (
-    <ul className="viking-upload-list">
-      {fileList.map((item) => {
+    <ul className="cheems-upload-list">
+      {fileList.map(item => {
         return (
-          <li className="viking-upload-list-item" key={item.uid}>
+          <li className="cheems-upload-list-item" key={item.uid}>
             <span className={`file-name file-name-${item.status}`}>
-              <Icon icon="file-alt" theme="secondary" />
+              <Icon icon="file-alt" theme={ThemeProps.secondary} />
               {item.name}
             </span>
             <span className="file-status">
               {(item.status === "uploading" || item.status === "ready") && (
-                <Icon icon="spinner" spin theme="primary" />
+                <Icon icon="spinner" spin theme={ThemeProps.primary} />
               )}
-              {item.status === "success" && (
-                <Icon icon="check-circle" theme="success" />
-              )}
-              {item.status === "error" && (
-                <Icon icon="times-circle" theme="danger" />
-              )}
+              {item.status === "success" && <Icon icon="check-circle" theme={ThemeProps.success} />}
+              {item.status === "error" && <Icon icon="times-circle" theme={ThemeProps.danger} />}
             </span>
             <span className="file-actions">
               <Icon
@@ -38,9 +34,7 @@ export const UploadList: FC<UploadListProps> = (props) => {
                 }}
               />
             </span>
-            {item.status === "uploading" && (
-              <Progress percent={item.percent || 0} />
-            )}
+            {item.status === "uploading" && <Progress percent={item.percent || 0} />}
           </li>
         );
       })}
