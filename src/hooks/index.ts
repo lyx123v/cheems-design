@@ -24,6 +24,7 @@ export { default as useScrolling } from "./useScrolling";
 export { default as useSelections } from "./useSelections";
 export { default as useSize } from "./useSize";
 export { default as useTextSelection } from "./useTextSelection";
+export { default as useTextHighlight } from "./useTextHighlight";
 export { default as useThrottle } from "./useThrottle";
 export { default as useThrottleFn } from "./useThrottleFn";
 export { default as useTrackedEffect } from "./useTrackedEffect";
