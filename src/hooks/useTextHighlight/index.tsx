@@ -6,15 +6,15 @@ interface useTextHighlightCinfig {
   /**
    * @description 全局匹配
    */
-  globalMatching: boolean;
+  globalMatching?: boolean;
   /**
    * @description 忽略大小写
    */
-  ignoreCase: boolean;
+  ignoreCase?: boolean;
   /**
    * @description 样式
    */
-  style: object;
+  style?: any;
 }
 
 let oldDom: string | null = null;
@@ -51,7 +51,7 @@ function useTextHighlight(node: HTMLElement, config?: useTextHighlightCinfig) {
       // 存储文本和 <mark> 元素。
       const fragments = [];
       let lastIndex = 0;
-      matches.forEach(match => {
+      matches.forEach((match: any) => {
         // 为匹配前的文本创建文本节点。
         fragments.push(document.createTextNode(nodeText.slice(lastIndex, match.index)));
         // mark元素用来标记或突出显示文本内容
@@ -71,7 +71,7 @@ function useTextHighlight(node: HTMLElement, config?: useTextHighlightCinfig) {
       node.parentNode!.removeChild(node); // 移除当前的文本节点。
       return;
     }
-    node.childNodes.forEach(dfs);
+    node.childNodes.forEach(dfs as any);
   };
   console.log("oldDom", oldDom);
   node.innerHTML = oldDom;
