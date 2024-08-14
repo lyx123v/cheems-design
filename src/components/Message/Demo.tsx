@@ -1,8 +1,8 @@
 import React from "react";
 import { MessageProps } from "../../components/Message";
 import "./index.css";
-import { ConfigProvider } from "../Space/ConfigProvider";
 import { useMessage } from "./useMessage";
+import { ConfigProvider } from "./ConfigProvider";
 
 function Aaa(args: MessageProps) {
   const message = useMessage();
