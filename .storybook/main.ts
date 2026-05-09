@@ -1,5 +1,6 @@
 import type { StorybookConfig } from "@storybook/react-webpack5";
 import TsconfigPathsPlugin from "tsconfig-paths-webpack-plugin";
+import path from "path";  // 添加这行导入语句
 
 const config: StorybookConfig = {
   stories: ["../src/**/*.mdx", "../src/**/*.stories.@(js|jsx|mjs|ts|tsx)"],
@@ -16,7 +17,8 @@ const config: StorybookConfig = {
     name: "@storybook/react-webpack5",
     options: {},
   },
-  staticDirs: ["..\\public"],
+  // staticDirs: ["..\\public"],
+  staticDirs: [path.join(__dirname, '..', 'public')], // 使用 path.join 构造平台无关路径
   webpackFinal: async config => {
     if (config.resolve) {
       config.resolve.plugins = [
